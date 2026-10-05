@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#050d16">
+  <title>IT Отдел — MegaDesk</title>
+  <style>
+    :root{
+      --bg:#050d16; --panel:#081522; --line:#153d61;
+      --blue:#169cff; --cyan:#55c9ff; --text:#f5f9ff;
+      --muted:#9ab0c3; --green:#39d98a;
+    }
+    *{box-sizing:border-box}
+    html,body{margin:0;min-height:100%;background:var(--bg);color:var(--text);
+      font-family:Inter,Segoe UI,Arial,sans-serif;-webkit-text-size-adjust:100%}
+    body{
+      background:
+        radial-gradient(circle at 85% 0,rgba(22,156,255,.14),transparent 32rem),
+        linear-gradient(180deg,#06111c,#050d16);
+    }
+    .app{min-height:100dvh}
+    .bar{height:40px;display:flex;align-items:center;gap:10px;padding:0 14px;
+      border-bottom:1px solid var(--line);color:#6d8ca5;
+      font:11px ui-monospace,SFMono-Regular,Consolas,monospace}
+    .dots{display:flex;gap:6px}.dots i{width:8px;height:8px;border-radius:50%;background:#245b85;display:block}
+    header{padding:22px 18px 18px;border-bottom:1px solid var(--line)}
+    .brand{font-size:44px;line-height:.95;font-weight:900;letter-spacing:-.055em}
+    .brand .it,.brand .cur{color:var(--blue)}
+    .tag{margin-top:10px;color:#879fb4;font-size:8px;line-height:1.5;letter-spacing:.12em;text-transform:uppercase}
+    .content{display:block}
+    .section{padding:22px 18px;border-bottom:1px solid var(--line)}
+    .file{color:var(--cyan);font:10px ui-monospace,SFMono-Regular,Consolas,monospace;margin-bottom:12px}
+    h1{margin:0 0 12px;font-size:34px;line-height:1.03;letter-spacing:-.045em}
+    h1 span{color:var(--blue)}
+    .lead{margin:0 0 16px;color:#dce8f3;font-size:14px;line-height:1.5}
+    .notice{padding:12px 13px;margin-bottom:17px;border-left:3px solid var(--blue);
+      border-radius:0 10px 10px 0;background:linear-gradient(90deg,rgba(22,156,255,.12),rgba(22,156,255,.025));
+      color:#cbddec;font-size:12px;line-height:1.45}
+    .steps{display:grid;gap:9px}
+    .step{display:grid;grid-template-columns:30px 1fr;gap:9px;align-items:start;color:#b3c6d6;font-size:12.5px;line-height:1.42}
+    .num{width:28px;height:28px;display:grid;place-items:center;border:1px solid #23699e;border-radius:8px;
+      background:#091d2e;color:var(--cyan);font:700 11px ui-monospace,SFMono-Regular,Consolas,monospace}
+    .launcher{margin-top:10px;padding:17px;border:1px solid #17466d;border-radius:14px;background:linear-gradient(180deg,#0a1928,#07131f)}
+    .status{display:flex;align-items:center;gap:8px;margin-bottom:14px;color:#9fb6c8;font-size:11px}
+    .lamp{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 14px rgba(57,217,138,.65)}
+    .appname{font-size:28px;font-weight:850;letter-spacing:-.035em;margin-bottom:6px}
+    .desc{color:#92aabd;font-size:12.5px;line-height:1.5;margin-bottom:16px}
+    .open{
+      display:flex;align-items:center;justify-content:center;width:100%;min-height:58px;
+      border-radius:11px;background:linear-gradient(135deg,#087ed1,#1ca8ff);
+      color:white;text-decoration:none;font-size:16px;font-weight:800;
+      box-shadow:0 12px 30px rgba(22,156,255,.22);touch-action:manipulation
+    }
+    .hint{margin-top:14px;padding:12px;border:1px solid #17466d;border-radius:10px;background:#091a29;
+      color:#b8cad8;font-size:12px;line-height:1.5}
+    .route{display:grid;gap:7px;margin-top:9px}
+    .route div{padding:9px 10px;border:1px solid #17466d;border-radius:9px;background:#081725}
+    .route b{color:var(--cyan)}
+    footer{min-height:46px;display:flex;align-items:center;padding:9px 14px;color:#64829a;
+      font:8px ui-monospace,SFMono-Regular,Consolas,monospace;letter-spacing:.06em;text-transform:uppercase}
+    footer .right{margin-left:auto;display:flex;gap:7px;align-items:center}
+
+    /* Desktop layout only on genuinely wide screens */
+    @media (min-width: 900px){
+      body{padding:18px}
+      .app{width:min(1080px,100%);min-height:auto;margin:0 auto;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+      header{padding:30px 34px 24px}
+      .brand{font-size:72px}
+      .tag{font-size:11px;letter-spacing:.20em}
+      .content{display:grid;grid-template-columns:1.05fr .95fr}
+      .section{padding:32px 34px;border-bottom:0}
+      .section:first-child{border-right:1px solid var(--line)}
+      .file{font-size:12px}
+      h1{font-size:52px}
+      .lead{font-size:16px}
+      .notice{font-size:13px}
+      .step{font-size:14px;grid-template-columns:34px 1fr}
+      .num{width:31px;height:31px;font-size:12px}
+      .launcher{padding:22px}
+      .appname{font-size:32px}
+      .desc{font-size:14px}
+      .route{grid-template-columns:repeat(2,minmax(0,1fr))}
+    }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <div class="bar">
+      <div class="dots"><i></i><i></i><i></i></div>
+      <div>/ company / it-department / megadesk</div>
+    </div>
+
+    <header>
+      <div class="brand"><span class="it">IT</span> ОТДЕЛ<span class="cur">_</span></div>
+      <div class="tag">ПОДДЕРЖИВАЕМ • РАЗВИВАЕМ • ДЕЛАЕМ ПРОЦЕССЫ ПРОЩЕ</div>
+    </header>
+
+    <section class="content">
+      <div class="section">
+        <div class="file">&gt; ИНСТРУКЦИЯ.md</div>
+        <h1>Как открыть <span>MegaDesk</span></h1>
+        <p class="lead">Перед посещением IT-отдела необходимо <strong>обязательно создать заявку в Битрикс</strong>.</p>
+        <div class="notice"><strong>После регистрации в Битрикс:</strong> откройте мобильное приложение Bitrix24 и выполните шаги ниже.</div>
+
+        <div class="steps">
+          <div class="step"><div class="num">1</div><div>Нажмите кнопку <strong>«Открыть Bitrix24»</strong>.</div></div>
+          <div class="step"><div class="num">2</div><div>В приложении откройте раздел <strong>«Меню»</strong>.</div></div>
+          <div class="step"><div class="num">3</div><div>Пролистайте вниз до категории <strong>«Маркет»</strong>.</div></div>
+          <div class="step"><div class="num">4</div><div>Нажмите <strong>«MegaDesk»</strong>.</div></div>
+          <div class="step"><div class="num">5</div><div>Создайте заявку и подробно опишите проблему или запрос.</div></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="file">// mobile application launcher</div>
+        <div class="launcher">
+          <div class="status"><span class="lamp"></span><span>Bitrix24 launcher</span></div>
+          <div class="appname">Bitrix24 Mobile</div>
+          <div class="desc">
+            Нажмите кнопку ниже. Она вызывает <strong>само приложение Bitrix24</strong> через его URL-схему.
+          </div>
+
+          <!-- ВАЖНО: никаких intent:// и никаких Google Play fallback -->
+          <a class="open" href="bitrix24://">Открыть Bitrix24</a>
+
+          <div class="hint">
+            <strong>После открытия приложения:</strong>
+            <div class="route">
+              <div><b>01</b> Меню</div>
+              <div><b>02</b> Маркет</div>
+              <div><b>03</b> MegaDesk</div>
+              <div><b>04</b> Создать заявку</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      &gt; IT-ОТДЕЛ
+      <div class="right"><span class="lamp"></span> ONLINE // v3.0</div>
+    </footer>
+  </main>
+</body>
+</html>
