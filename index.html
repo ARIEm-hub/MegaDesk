@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
   <meta name="theme-color" content="#07111f">
   <meta name="color-scheme" content="dark">
   <title>IT Отдел — MegaDesk</title>
@@ -11,18 +11,17 @@
     :root{
       --bg:#050d16;
       --panel:#081522;
-      --panel2:#0b1a2a;
+      --panel2:#0a1928;
       --line:#153d61;
+      --line2:#1c527f;
       --blue:#159dff;
       --cyan:#54c7ff;
       --text:#f5f9ff;
       --muted:#8ca7bf;
       --green:#39d98a;
-      --warning:#ffc857;
     }
 
     *{box-sizing:border-box}
-
     html,body{
       margin:0;
       min-height:100%;
@@ -32,15 +31,12 @@
         linear-gradient(180deg,#06101a 0%,#050d16 100%);
       color:var(--text);
       font-family:Inter,Segoe UI,Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
     }
 
     body{
       min-height:100vh;
-      display:flex;
-      align-items:center;
-      justify-content:center;
       padding:18px;
-      overflow-x:hidden;
     }
 
     body::before{
@@ -48,7 +44,7 @@
       position:fixed;
       inset:0;
       pointer-events:none;
-      opacity:.16;
+      opacity:.14;
       background-image:
         linear-gradient(rgba(84,199,255,.12) 1px,transparent 1px),
         linear-gradient(90deg,rgba(84,199,255,.12) 1px,transparent 1px);
@@ -57,10 +53,11 @@
     }
 
     .app{
-      width:min(1040px,100%);
+      width:min(1080px,100%);
+      margin:0 auto;
       border:1px solid var(--line);
       border-radius:20px;
-      background:rgba(5,15,25,.94);
+      background:rgba(5,15,25,.95);
       box-shadow:0 30px 100px rgba(0,0,0,.42);
       overflow:hidden;
       position:relative;
@@ -68,31 +65,35 @@
     }
 
     .windowbar{
-      height:46px;
+      min-height:46px;
       display:flex;
       align-items:center;
+      gap:14px;
       padding:0 16px;
       border-bottom:1px solid var(--line);
       color:#6f8da8;
       font:13px ui-monospace,SFMono-Regular,Consolas,monospace;
-      gap:14px;
     }
 
-    .dots{display:flex;gap:8px}
+    .dots{display:flex;gap:8px;flex:0 0 auto}
     .dots i{
-      display:block;
-      width:9px;
-      height:9px;
-      border-radius:50%;
+      width:9px;height:9px;border-radius:50%;
       background:#245b85;
+      display:block;
     }
 
-    .windowbar .path{opacity:.95}
-    .windowbar .nav{
+    .path{
+      overflow:hidden;
+      text-overflow:ellipsis;
+      white-space:nowrap;
+    }
+
+    .nav{
       margin-left:auto;
       letter-spacing:.08em;
       text-transform:uppercase;
       font-size:11px;
+      white-space:nowrap;
     }
 
     header{
@@ -107,9 +108,9 @@
       position:absolute;
       right:32px;
       top:34px;
-      max-width:350px;
+      max-width:330px;
       color:#2f6e9e;
-      opacity:.42;
+      opacity:.38;
       font:14px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace;
     }
 
@@ -131,12 +132,13 @@
       font-size:12px;
       letter-spacing:.24em;
       text-transform:uppercase;
+      max-width:680px;
     }
 
     .layout{
       display:grid;
-      grid-template-columns:1.1fr .9fr;
-      min-height:430px;
+      grid-template-columns:1.12fr .88fr;
+      min-height:500px;
     }
 
     .left,.right{
@@ -167,7 +169,6 @@
       font-size:17px;
       line-height:1.55;
       margin:0 0 22px;
-      max-width:650px;
     }
 
     .notice{
@@ -181,27 +182,25 @@
       margin-bottom:22px;
     }
 
-    .notice strong{color:white}
+    .notice strong{color:#fff}
 
     .steps{
       display:grid;
-      gap:10px;
-      margin-top:18px;
+      gap:12px;
     }
 
     .step{
       display:grid;
-      grid-template-columns:34px 1fr;
-      gap:11px;
+      grid-template-columns:36px 1fr;
+      gap:12px;
       align-items:start;
       color:#adc2d4;
       font-size:14px;
-      line-height:1.45;
+      line-height:1.5;
     }
 
     .num{
-      width:30px;
-      height:30px;
+      width:32px;height:32px;
       display:grid;
       place-items:center;
       border:1px solid #21649a;
@@ -259,6 +258,7 @@
       width:9px;height:9px;border-radius:50%;
       background:var(--green);
       box-shadow:0 0 18px rgba(57,217,138,.75);
+      flex:0 0 auto;
     }
 
     .mega{
@@ -271,9 +271,11 @@
     .sub{
       color:#8fa8bc;
       font-size:14px;
-      line-height:1.5;
+      line-height:1.55;
       margin-bottom:22px;
     }
+
+    .sub strong{color:#dcecff}
 
     button{
       width:100%;
@@ -287,34 +289,57 @@
       cursor:pointer;
       box-shadow:0 12px 32px rgba(21,157,255,.22);
       transition:.18s transform,.18s filter;
+      touch-action:manipulation;
     }
 
-    button:active{transform:translateY(1px);filter:brightness(.95)}
-
-    .mini{
-      margin-top:12px;
-      color:#6f8aa1;
-      font-size:12px;
-      line-height:1.5;
+    button:active{
+      transform:translateY(1px);
+      filter:brightness(.95);
     }
 
-    .result{
-      display:none;
+    .hint{
       margin-top:15px;
-      padding:12px 13px;
+      padding:13px 14px;
+      border:1px solid #16446b;
+      background:#091825;
       border-radius:10px;
-      background:#0a1927;
-      border:1px solid #1a466a;
-      color:#b8ccdc;
+      color:#adc3d4;
       font-size:13px;
       line-height:1.5;
     }
 
-    .result.show{display:block}
-    .result.warn{border-color:#6b5722;color:#dccb9d}
+    .hint strong{color:#fff}
+
+    .route{
+      display:flex;
+      flex-wrap:wrap;
+      gap:7px;
+      margin-top:10px;
+    }
+
+    .route span{
+      border:1px solid var(--line2);
+      background:#0a1b2a;
+      border-radius:999px;
+      padding:7px 10px;
+      color:#bcd1e3;
+      font-size:12px;
+    }
+
+    .route b{
+      color:var(--cyan);
+      font-weight:700;
+    }
+
+    .mini{
+      margin-top:13px;
+      color:#6f8aa1;
+      font-size:12px;
+      line-height:1.55;
+    }
 
     footer{
-      height:44px;
+      min-height:44px;
       border-top:1px solid var(--line);
       display:flex;
       align-items:center;
@@ -332,18 +357,182 @@
       gap:8px;
     }
 
+    /* МОБИЛЬНАЯ ВЕРСИЯ */
     @media(max-width:780px){
-      body{padding:0}
-      .app{min-height:100vh;border-radius:0;border-left:0;border-right:0}
-      .windowbar .nav{display:none}
-      header{padding:28px 22px 22px}
+      html,body{width:100%;overflow-x:hidden}
+      body{
+        padding:0;
+        background:#050d16;
+      }
+
+      body::before{
+        background-size:24px 24px;
+        opacity:.12;
+      }
+
+      .app{
+        width:100%;
+        min-height:100vh;
+        border:0;
+        border-radius:0;
+        box-shadow:none;
+      }
+
+      .windowbar{
+        min-height:40px;
+        padding:0 14px;
+        font-size:11px;
+      }
+
+      .dots{gap:6px}
+      .dots i{width:8px;height:8px}
+      .nav{display:none}
+
+      header{
+        padding:24px 18px 20px;
+      }
+
       header::after{display:none}
-      .tagline{font-size:10px;line-height:1.6}
-      .layout{grid-template-columns:1fr}
-      .left,.right{padding:26px 22px}
-      .left{border-right:0;border-bottom:1px solid var(--line)}
-      .right{padding-bottom:34px}
-      footer{padding:0 14px;font-size:9px}
+
+      .brand{
+        font-size:48px;
+        line-height:.95;
+        letter-spacing:-.05em;
+      }
+
+      .tagline{
+        margin-top:12px;
+        font-size:9px;
+        line-height:1.55;
+        letter-spacing:.14em;
+      }
+
+      .layout{
+        display:block;
+        min-height:0;
+      }
+
+      .left,.right{
+        padding:24px 18px;
+      }
+
+      .left{
+        border-right:0;
+        border-bottom:1px solid var(--line);
+      }
+
+      .filetab{
+        font-size:11px;
+        margin-bottom:14px;
+      }
+
+      h1{
+        font-size:36px;
+        line-height:1.05;
+        margin-bottom:14px;
+      }
+
+      .lead{
+        font-size:15px;
+        line-height:1.5;
+        margin-bottom:18px;
+      }
+
+      .notice{
+        padding:13px 14px;
+        font-size:13px;
+        margin-bottom:18px;
+      }
+
+      .steps{
+        gap:10px;
+      }
+
+      .step{
+        grid-template-columns:34px 1fr;
+        gap:10px;
+        font-size:13px;
+        line-height:1.45;
+      }
+
+      .num{
+        width:30px;
+        height:30px;
+        font-size:12px;
+      }
+
+      .right{
+        display:block;
+      }
+
+      .terminal-title{
+        font-size:11px;
+        margin-bottom:12px;
+      }
+
+      .launcher{
+        padding:18px;
+        border-radius:14px;
+      }
+
+      .status{
+        font-size:12px;
+        margin-bottom:16px;
+      }
+
+      .mega{
+        font-size:29px;
+      }
+
+      .sub{
+        font-size:13px;
+        margin-bottom:18px;
+      }
+
+      button{
+        min-height:58px;
+        font-size:16px;
+        border-radius:11px;
+      }
+
+      .hint{
+        font-size:12px;
+        padding:12px;
+      }
+
+      .route{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:7px;
+      }
+
+      .route span{
+        border-radius:10px;
+        padding:9px 10px;
+      }
+
+      .mini{
+        font-size:11px;
+      }
+
+      footer{
+        padding:12px 14px;
+        min-height:48px;
+        font-size:9px;
+        gap:8px;
+      }
+
+      footer .rightfoot{
+        margin-left:auto;
+      }
+    }
+
+    /* Очень узкие телефоны */
+    @media(max-width:390px){
+      .brand{font-size:42px}
+      h1{font-size:32px}
+      .left,.right{padding-left:16px;padding-right:16px}
+      .windowbar{padding-left:12px;padding-right:12px}
     }
   </style>
 </head>
@@ -364,38 +553,46 @@
     <section class="layout">
       <div class="left">
         <div class="filetab">&gt; ИНСТРУКЦИЯ.md</div>
-        <h1>Открыть <span>MegaDesk</span></h1>
+        <h1>Как открыть <span>MegaDesk</span></h1>
+
         <p class="lead">
-          Перед посещением IT-отдела необходимо обязательно создать заявку в Битрикс.
+          Перед посещением IT-отдела необходимо <strong>обязательно создать заявку в Битрикс</strong>.
         </p>
 
         <div class="notice">
-          <strong>Важно:</strong> эта страница не отправляет вас в веб-версию MegaDesk автоматически.
-          Кнопка ниже пытается передать открытие установленному приложению Bitrix24.
+          <strong>После регистрации в Битрикс:</strong> откройте мобильное приложение Bitrix24 и выполните шаги ниже.
         </div>
 
         <div class="steps">
           <div class="step">
             <div class="num">1</div>
-            <div>Войдите в Bitrix24 через портал <code>portal.dasm.kz</code>.</div>
+            <div>Откройте приложение <strong>Bitrix24</strong> на телефоне.</div>
           </div>
+
           <div class="step">
             <div class="num">2</div>
-            <div>Используйте корпоративную учётную запись, например <code>r.kozlik</code>.</div>
+            <div>Перейдите в раздел <strong>«Меню»</strong>.</div>
           </div>
+
           <div class="step">
             <div class="num">3</div>
-            <div>Нажмите кнопку справа — сайт попробует открыть установленный Bitrix24.</div>
+            <div>Пролистайте вниз до категории <strong>«Маркет»</strong>.</div>
           </div>
+
           <div class="step">
             <div class="num">4</div>
-            <div>Если мобильный Bitrix24 поддержит переданный адрес, откроется MegaDesk. Если нет — приложение просто запустится.</div>
+            <div>В категории <strong>«Маркет»</strong> нажмите <strong>«MegaDesk»</strong>.</div>
+          </div>
+
+          <div class="step">
+            <div class="num">5</div>
+            <div>Создайте заявку и подробно опишите проблему или запрос.</div>
           </div>
         </div>
       </div>
 
       <div class="right">
-        <div class="terminal-title">// application launcher</div>
+        <div class="terminal-title">// mobile application launcher</div>
 
         <div class="launcher">
           <div class="status">
@@ -403,18 +600,28 @@
             <span id="deviceStatus">Определяем устройство…</span>
           </div>
 
-          <div class="mega">MegaDesk</div>
+          <div class="mega">Bitrix24 Mobile</div>
+
           <div class="sub">
-            Заявки в IT-отдел через корпоративный Битрикс24.
+            Нажмите кнопку, чтобы открыть приложение Bitrix24.
+            После запуска перейдите по пути:
           </div>
 
-          <button id="launchBtn" type="button">Открыть MegaDesk</button>
+          <button id="launchBtn" type="button">Открыть Bitrix24</button>
 
-          <div id="result" class="result"></div>
+          <div class="hint">
+            <strong>Дальше вручную:</strong>
+            <div class="route">
+              <span><b>1.</b> Меню</span>
+              <span><b>2.</b> Маркет</span>
+              <span><b>3.</b> MegaDesk</span>
+              <span><b>4.</b> Создать заявку</span>
+            </div>
+          </div>
 
           <div class="mini">
-            Адрес MegaDesk: <code>/marketplace/app/82/</code><br>
-            Портал: <code>portal.dasm.kz</code>
+            Корпоративный портал: <code>portal.dasm.kz</code><br>
+            Вход выполняется под вашей рабочей учётной записью.
           </div>
         </div>
       </div>
@@ -422,94 +629,42 @@
 
     <footer>
       &gt; IT-ОТДЕЛ
-      <div class="rightfoot"><span class="lamp"></span> ONLINE // v1.0</div>
+      <div class="rightfoot"><span class="lamp"></span> ONLINE // v1.2</div>
     </footer>
   </main>
 
 <script>
 (() => {
-  const PORTAL_HOST = 'portal.dasm.kz';
-  const MEGADESK_PATH = '/marketplace/app/82/';
-  const WEB_URL = `https://${PORTAL_HOST}${MEGADESK_PATH}`;
-
   const ua = navigator.userAgent || '';
   const isAndroid = /Android/i.test(ua);
   const isIOS = /iPhone|iPad|iPod/i.test(ua);
 
-  const deviceStatus = document.getElementById('deviceStatus');
+  const status = document.getElementById('deviceStatus');
   const button = document.getElementById('launchBtn');
-  const result = document.getElementById('result');
-
-  function show(message, warning = false) {
-    result.textContent = message;
-    result.className = 'result show' + (warning ? ' warn' : '');
-  }
 
   if (isAndroid) {
-    deviceStatus.textContent = 'Android // Bitrix24 launcher ready';
+    status.textContent = 'Android // Bitrix24 ready';
   } else if (isIOS) {
-    deviceStatus.textContent = 'iPhone / iPad // Bitrix24 launcher ready';
+    status.textContent = 'iPhone / iPad // Bitrix24 ready';
   } else {
-    deviceStatus.textContent = 'Desktop / неизвестное устройство';
-    button.textContent = 'Открыть MegaDesk в браузере';
+    status.textContent = 'Откройте страницу с телефона';
   }
 
   button.addEventListener('click', () => {
     if (isAndroid) {
-      /*
-       * ВАЖНО:
-       * Принудительно указываем package Bitrix24 и НЕ добавляем browser_fallback_url.
-       * Поэтому эта кнопка не должна специально отправлять пользователя в браузер.
-       *
-       * Если конкретная версия Bitrix24 не зарегистрирована как обработчик такого URL,
-       * Android может отказаться передавать внутренний путь приложению.
-       */
-      const intent =
-        `intent://${PORTAL_HOST}${MEGADESK_PATH}` +
-        `#Intent;scheme=https;package=com.bitrix24.android;end`;
-
-      show('Передаём ссылку приложению Bitrix24…');
-      window.location.href = intent;
-
-      setTimeout(() => {
-        if (!document.hidden) {
-          show(
-            'Bitrix24 не принял прямой переход в MegaDesk. Это ограничение мобильного приложения: внешнего deep-link на внутренний Marketplace-раздел может не быть.',
-            true
-          );
-        }
-      }, 1800);
-
+      // Запуск именно приложения Bitrix24, без browser fallback.
+      window.location.href =
+        'intent://open#Intent;scheme=bitrix24;package=com.bitrix24.android;end';
       return;
     }
 
     if (isIOS) {
-      /*
-       * Официально мобильный Bitrix24 не разбирает внутренний адрес после bitrix24://.
-       * Эта схема может только вывести приложение на передний план.
-       */
-      show('Открываем приложение Bitrix24…');
+      // Запуск установленного Bitrix24.
       window.location.href = 'bitrix24://';
-
-      setTimeout(() => {
-        if (!document.hidden) {
-          show(
-            'Не удалось открыть Bitrix24. Проверьте, установлено ли приложение.',
-            true
-          );
-        }
-      }, 1800);
-
       return;
     }
 
-    window.location.href = WEB_URL;
-  });
-
-  document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-      result.className = 'result';
-    }
+    alert('Откройте эту страницу с телефона.');
   });
 })();
 </script>
